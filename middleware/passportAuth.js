@@ -6,7 +6,7 @@ const User = require("../models/User");
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.JWTSECRET;
+opts.secretOrKey = process.env.JWT_SECRET;
 opts.jsonWebTokenOptions = {
   expiresIn: process.env.EXPIRES_IN,
 };

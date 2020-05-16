@@ -52,7 +52,7 @@ router.post("/login", async (req, res) => {
         });
       }
       // 3. create jwt
-      const token = jsonwebToken.sign({ id: user._id }, process.env.JWTSECRET);
+      const token = jsonwebToken.sign({ id: user._id }, process.env.JWT_SECRET);
       // 4. send jwt and client (react, vue) should save it somewhere to reuse when making request
       return res.status(200).send({
         message: "You are login",
@@ -94,7 +94,7 @@ router.post("/signup", async (req, res) => {
 
   // create token
   // when we create the user we send the tooken
-  let token = jsonwebToken.sign({ id: newUser._id }, process.env.JWTSECRET);
+  let token = jsonwebToken.sign({ id: newUser._id }, process.env.JWT_SECRET);
 
   return res.json({
     message: "user has been created",
