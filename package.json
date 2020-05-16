@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "dev1": "nodemon server.js",
-    "dev": "concurrently \"cd .. && cd testapp && npm run start \" \"npm run start\""
+    "dev": "nodemon server.js",
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
