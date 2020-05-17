@@ -11,12 +11,10 @@ const User = require("../models/User");
 
 router.get("/profile", (req, res, next) => {
   passport.authenticate("jwt", { session: false }, function (err, user, info) {
-    if (err) {
-      return next(err);
+    if (err || !user) {
+      return next(createError(403, "Make sure you are signed in."));
     }
-    if (!user) {
-      return res.status(401).send({ message: "Make sure you are signed in" });
-    }
+
     return res.json({
       message: "you are loged in",
       data: {
