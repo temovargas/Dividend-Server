@@ -12,12 +12,14 @@ opts.jsonWebTokenOptions = {
 };
 passport.use(
   new JwtStrategy(opts, function (jwt_payload, done) {
-    User.findById(jwt_payload.id, function (err, user) {
+    User.findById({ _id: jwt_payload.id }, function (err, user) {
       if (err) {
         return done(err, false);
       }
       if (user) {
         return done(null, user);
+      } else {
+        return done(null, false);
       }
     });
   })
