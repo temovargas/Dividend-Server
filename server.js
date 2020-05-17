@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const cors = require("cors");
+const createError = require("http-errors");
 
 const userRoutes = require("./routes/users");
 
@@ -38,6 +39,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // routes
 app.use("/users", userRoutes);
+// Error // Logging the error
+
+app.use((req, res, next) => {
+  next(createError(404));
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    status: error.status,
+    message: error.message,
+  });
+});
+
 // server
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
